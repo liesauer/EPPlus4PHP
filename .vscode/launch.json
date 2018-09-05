@@ -1,0 +1,32 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "EPPlus4PHP.Test.CSharp",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/EPPlus4PHP.Test.CSharp/bin/Debug/netcoreapp2.0/EPPlus4PHP.Test.CSharp.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/EPPlus4PHP.Test.CSharp",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "name": "EPPlus4PHP.Test.PHP",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/EPPlus4PHP.Test.PHP/bin/Debug/netcoreapp2.0/EPPlus4PHP.Test.PHP.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/EPPlus4PHP.Test.PHP",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart"
+        }
+    ]
+}
