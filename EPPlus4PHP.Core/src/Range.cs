@@ -10,6 +10,14 @@ namespace nulastudio.Document.EPPlus4PHP
 {
     public class Range : ArrayAccess
     {
+        // [A-Z]+[1-9][0-9]*:[A-Z]+[1-9][0-9]*
+        public const string REGEX_PRUE_ROW = "^[1-9][0-9]*$";
+        public const string REGEX_PRUE_COLUMN = "^[A-Z]+$";
+        public const string REGEX_SINGLE_CELL = "^[A-Z]+[1-9][0-9]*$";
+        public const string REGEX_SINGLE_ROW = "^[1-9][0-9]*:[1-9][0-9]*$";
+        public const string REGEX_SINGLE_COLUMN = "^[A-Z]+:[A-Z]+$";
+        public const string REGEX_MULTI_CELLS = "^^[A-Z]+[1-9][0-9]*:[A-Z]+[1-9][0-9]*$";
+
         private ExcelRange _range;
         private Style.Style _style;
         private bool _is1Base;
@@ -61,48 +69,85 @@ namespace nulastudio.Document.EPPlus4PHP
         // 行选 [1]["1"]["1:1"]
         // 窗选 ["A1:B2"]
         // 多选 ["A1:B2,A,8"]["A1:B2,A:A,1:1000"]
-        public static string parseAddress(Context ctx, PhpValue address)
+        public static bool tryParseAddress(Context ctx, PhpValue address, PhpAlias addr_out)
         {
-            return parseAddress(address.ToString(ctx));
-        }
-        public static string parseAddress(Context ctx, PhpString address)
-        {
-            return parseAddress(address.ToString(ctx));
-        }
-        public static string parseAddress(string address)
-        {
-            #warning invalid address or out-of-bounds address cannot be detected till now.
-            string normalizeAddress(string _address)
+            bool res = tryParseAddress(address.ToString(ctx), out var tmp_addr);
+            if (res)
             {
-                int row = 0;
-                if (int.TryParse(_address, out row))
+                addr_out.Value = PhpValue.Create(tmp_addr);
+            }
+            return res;
+        }
+        // public static bool tryParseAddress(Context ctx, PhpString address, PhpAlias addr_out)
+        // {
+        //     bool res = tryParseAddress(address.ToString(ctx), out var tmp_addr);
+        //     if (res)
+        //     {
+        //         addr_out.Value = PhpValue.Create(tmp_addr);
+        //     }
+        //     return res;
+        // }
+        public static bool tryParseAddress(string address, out string address_out)
+        {
+            bool tryNormalizeAddress(string addr_in, out string addr_out)
+            {
+                if (int.TryParse(addr_in, out var row) &&
+                    row >= 1 &&
+                    row <= ExcelPackage.MAX_ROWS)
                 {
-                    // row
-                    return $"{row}:{row}";
+                    // pure row
+                    addr_out = $"{row}:{row}";
+                    return true;
                 }
-                else
+                else if (Regex.IsMatch(addr_in, REGEX_PRUE_COLUMN) &&
+                         ExcelConvert.toIndex(addr_in) <= ExcelPackage.MAX_COLUMNS)
                 {
                     // pure column
-                    if (Regex.IsMatch(_address, "^[A-Z]+$"))
+                    addr_out = $"{addr_in}:{addr_in}";
+                    return true;
+                }
+                else if (Regex.IsMatch(addr_in, REGEX_SINGLE_CELL))
+                {
+                    // single cell
+                    string addr1 = Regex.Match(addr_in, @"^[A-Z]+").Value;
+                    string addr2 = Regex.Match(addr_in, @"[1-9][0-9]*$").Value;
+                    if (tryNormalizeAddress(addr1, out var tmp_addr1) &&
+                        tryNormalizeAddress(addr2, out var tmp_addr2))
                     {
-                        return $"{_address}:{_address}";
-                    }
-                    else
-                    {
-                        return _address;
+                        addr_out = addr_in;
+                        return true;
                     }
                 }
+                else if (Regex.IsMatch(addr_in, REGEX_SINGLE_ROW)    ||
+                         Regex.IsMatch(addr_in, REGEX_SINGLE_COLUMN) ||
+                         Regex.IsMatch(addr_in, REGEX_MULTI_CELLS))
+                {
+                    // row:row
+                    // column:column
+                    // multi cells
+                    string[] addrs = addr_in.Split(':');
+                    if (tryNormalizeAddress(addrs[0], out var tmp_addr1) &&
+                        tryNormalizeAddress(addrs[1], out var tmp_addr2))
+                    {
+                        addr_out = addr_in;
+                        return true;
+                    }
+                }
+                addr_out = "";
+                return false;
             }
-            address = Regex.Replace(address, "[^0-9a-zA-Z\\:\\,]", "").ToUpper();
-            string[] addresses = address.Split(',');
+            address = Regex.Replace(address, @"\s", "").ToUpper();
             List<string> res = new List<string>();
-            foreach (string addr in addresses)
+            foreach (string addr in address.Split(','))
             {
-                res.Add(normalizeAddress(addr));
+                if (tryNormalizeAddress(addr, out var addr_out))
+                {
+                    res.Add(addr_out);
+                }
             }
-            return string.Join(",",res);
+            address_out = string.Join(",",res);
+            return res.Count != 0;
         }
-
         #endregion
 
 
