@@ -24,18 +24,18 @@ use nulastudio\Document\EPPlus4PHP\Range;
 // var_dump(ExcelConvert::toIndex('A'));
 // var_dump(ExcelConvert::toIndex('XFD'));
 // $tmp_addr;
-var_dump(Range::tryParseAddress("a", $tmp_addr), $tmp_addr);
-var_dump(Range::tryParseAddress("a", $tmp_addr), $tmp_addr); // y
-var_dump(Range::tryParseAddress("xfd", $tmp_addr), $tmp_addr); // y
-var_dump(Range::tryParseAddress("xfe", $tmp_addr), $tmp_addr); // n
-var_dump(Range::tryParseAddress("0", $tmp_addr), $tmp_addr);   // n
-var_dump(Range::tryParseAddress("1", $tmp_addr), $tmp_addr);   // y
-var_dump(Range::tryParseAddress("88888888", $tmp_addr), $tmp_addr);   // n
-var_dump(Range::tryParseAddress("a:a", $tmp_addr), $tmp_addr); // y
-var_dump(Range::tryParseAddress("1:1", $tmp_addr), $tmp_addr); // y
-var_dump(Range::tryParseAddress("da", $tmp_addr), $tmp_addr);  // y
-var_dump(Range::tryParseAddress("a,1,1:1,a2,a2:a5", $tmp_addr), $tmp_addr); // y
-var_dump(Range::tryParseAddress("a,1,1:1,a2,88888888,1q:q1,a2:a5", $tmp_addr), $tmp_addr); // n
+// var_dump(Range::tryParseAddress("a", $tmp_addr), $tmp_addr);
+// var_dump(Range::tryParseAddress("a", $tmp_addr), $tmp_addr); // y
+// var_dump(Range::tryParseAddress("xfd", $tmp_addr), $tmp_addr); // y
+// var_dump(Range::tryParseAddress("xfe", $tmp_addr), $tmp_addr); // n
+// var_dump(Range::tryParseAddress("0", $tmp_addr), $tmp_addr);   // n
+// var_dump(Range::tryParseAddress("1", $tmp_addr), $tmp_addr);   // y
+// var_dump(Range::tryParseAddress("88888888", $tmp_addr), $tmp_addr);   // n
+// var_dump(Range::tryParseAddress("a:a", $tmp_addr), $tmp_addr); // y
+// var_dump(Range::tryParseAddress("1:1", $tmp_addr), $tmp_addr); // y
+// var_dump(Range::tryParseAddress("da", $tmp_addr), $tmp_addr);  // y
+// var_dump(Range::tryParseAddress("a,1,1:1,a2,a2:a5", $tmp_addr), $tmp_addr); // y
+// var_dump(Range::tryParseAddress("a,1,1:1,a2,88888888,1q:q1,a2:a5", $tmp_addr), $tmp_addr); // n
 
 // $package->save();
 
