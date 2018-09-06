@@ -23,11 +23,8 @@ use nulastudio\Document\EPPlus4PHP\Range;
 // var_dump(ExcelConvert::toName(1048576));
 // var_dump(ExcelConvert::toIndex('A'));
 // var_dump(ExcelConvert::toIndex('XFD'));
-$tmp_addr = '';
-var_dump($tmp_addr);
-$res = Range::tryParseAddress("a", $tmp_addr);
-var_dump($res);
-var_dump(Range::tryParseAddress("a", $tmp_addr));
+// $tmp_addr;
+var_dump(Range::tryParseAddress("a", $tmp_addr), $tmp_addr);
 var_dump(Range::tryParseAddress("a", $tmp_addr), $tmp_addr); // y
 var_dump(Range::tryParseAddress("xfd", $tmp_addr), $tmp_addr); // y
 var_dump(Range::tryParseAddress("xfe", $tmp_addr), $tmp_addr); // n

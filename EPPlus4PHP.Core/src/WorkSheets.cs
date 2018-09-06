@@ -101,7 +101,7 @@ namespace nulastudio.Document.EPPlus4PHP
                     if (key.IsInteger)
                     {
                         // 需要兼容ZERO-BASE以及ONE-BASE
-                        #warning 不检查索引会导致EPPlus抛出System.IndexOutOfRangeException异常
+                        // #warning 不检查索引会导致EPPlus抛出System.IndexOutOfRangeException异常
                         return (is1Base ? _workSheets[key.Integer] : _workSheets[key.Integer - 1]) != null;
                     }
                     else

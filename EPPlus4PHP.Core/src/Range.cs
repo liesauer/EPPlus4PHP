@@ -69,15 +69,15 @@ namespace nulastudio.Document.EPPlus4PHP
         // 行选 [1]["1"]["1:1"]
         // 窗选 ["A1:B2"]
         // 多选 ["A1:B2,A,8"]["A1:B2,A:A,1:1000"]
-        public static bool tryParseAddress(Context ctx, PhpValue address, PhpAlias addr_out)
-        {
-            bool res = tryParseAddress(address.ToString(ctx), out var tmp_addr);
-            if (res)
-            {
-                addr_out.Value = PhpValue.Create(tmp_addr);
-            }
-            return res;
-        }
+        // public static bool tryParseAddress(Context ctx, PhpValue address, PhpAlias addr_out)
+        // {
+        //     bool res = tryParseAddress(address.ToString(ctx), out var tmp_addr);
+        //     if (res)
+        //     {
+        //         addr_out.Value = PhpValue.Create(tmp_addr);
+        //     }
+        //     return res;
+        // }
         // public static bool tryParseAddress(Context ctx, PhpString address, PhpAlias addr_out)
         // {
         //     bool res = tryParseAddress(address.ToString(ctx), out var tmp_addr);
