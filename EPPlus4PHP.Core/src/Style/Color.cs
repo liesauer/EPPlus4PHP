@@ -100,5 +100,14 @@ namespace nulastudio.Document.EPPlus4PHP.Style
                 ValueChanged(this, e);
             }
         }
+
+        // will not trigger valuechanged
+        public void setColor(int alpha, int red, int green, int blue)
+        {
+            _alpha = alpha;
+            _red = red;
+            _green = green;
+            _blue = blue;
+        }
     }
 }
