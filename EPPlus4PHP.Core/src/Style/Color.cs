@@ -38,7 +38,7 @@ namespace nulastudio.Document.EPPlus4PHP.Style
             _alpha = alpha;
             _red = red;
             _green = green;
-            _blue = green;
+            _blue = blue;
         }
 
         public int alpha { get => _alpha; set => _alpha = value & 0xFF; }
