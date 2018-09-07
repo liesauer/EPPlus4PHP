@@ -3,8 +3,9 @@
 use nulastudio\Document\EPPlus4PHP\ExcelPackage;
 use nulastudio\Document\EPPlus4PHP\ExcelConvert;
 use nulastudio\Document\EPPlus4PHP\Range;
+use nulastudio\Document\EPPlus4PHP\Style\Color;
 
-// $package = new ExcelPackage(__DIR__ . '/test.xlsx');
+$package = new ExcelPackage(__DIR__ . '/test.xlsx');
 
 
 // worksheet
@@ -36,6 +37,13 @@ use nulastudio\Document\EPPlus4PHP\Range;
 // var_dump(Range::tryParseAddress("da", $tmp_addr), $tmp_addr);  // y
 // var_dump(Range::tryParseAddress("a,1,1:1,a2,a2:a5", $tmp_addr), $tmp_addr); // y
 // var_dump(Range::tryParseAddress("a,1,1:1,a2,88888888,1q:q1,a2:a5", $tmp_addr), $tmp_addr); // n
+
+// style font color
+$package->workBook->workSheets['test sheet']->cells['A1']->style->font->color = Color::YELLOW_COLOR;
+$color = $package->workBook->workSheets['test sheet']->cells['A1']->style->font->color;
+var_dump($color);
+
+$package->workBook->workSheets['test sheet']->cells['A1']->style->font->color->alpha = 0xBB;
 
 // $package->save();
 

@@ -30,6 +30,8 @@ namespace nulastudio.Document.EPPlus4PHP.Style
         private int _green;
         private int _blue;
 
+        public event EventHandler<EventArgs> ValueChanged;
+
         public Color() : this(0, 255, 255, 255)
         {
         }
@@ -41,10 +43,42 @@ namespace nulastudio.Document.EPPlus4PHP.Style
             _blue = blue;
         }
 
-        public int alpha { get => _alpha; set => _alpha = value & 0xFF; }
-        public int red { get => _red; set => _red = value & 0xFF; }
-        public int green { get => _green; set => _green = value & 0xFF; }
-        public int blue { get => _blue; set => _blue = value & 0xFF; }
+        public int alpha
+        {
+            get => _alpha;
+            set
+            {
+                _alpha = value & 0xFF;
+                OnValueChanged(new EventArgs());
+            }
+        }
+        public int red
+        {
+            get => _red;
+            set
+            {
+                _red = value & 0xFF;
+                OnValueChanged(new EventArgs());
+            }
+        }
+        public int green
+        {
+            get => _green;
+            set
+            {
+                _green = value & 0xFF;
+                OnValueChanged(new EventArgs());
+            }
+        }
+        public int blue
+        {
+            get => _blue;
+            set
+            {
+                _blue = value & 0xFF;
+                OnValueChanged(new EventArgs());
+            }
+        }
 
         public static implicit operator Color(long aRBG)
         {
@@ -57,6 +91,14 @@ namespace nulastudio.Document.EPPlus4PHP.Style
         public static implicit operator long(Color color)
         {
             return color.alpha << 24 & color.red << 16 & color.green << 8 & color.blue;
+        }
+
+        protected virtual void OnValueChanged(EventArgs e)
+        {
+            if (ValueChanged != null)
+            {
+                ValueChanged(this, e);
+            }
         }
     }
 }
