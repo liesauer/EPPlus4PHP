@@ -48,9 +48,9 @@ namespace nulastudio.Document.EPPlus4PHP.Style
 
         public static implicit operator Color(long aRBG)
         {
-            int alpha = (int)(aRBG & 0xFF000000) >> 24;
-            int red = (int)(aRBG & 0xFF0000) >> 16;
-            int green = (int)(aRBG & 0xFF00) >> 8;
+            int alpha = (int)((aRBG & 0xFF000000) >> 24);
+            int red = (int)((aRBG & 0xFF0000) >> 16);
+            int green = (int)((aRBG & 0xFF00) >> 8);
             int blue = (int)(aRBG & 0xFF);
             return new Color(alpha, red, green, blue);
         }
