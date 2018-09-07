@@ -47,10 +47,18 @@ namespace nulastudio.Document.EPPlus4PHP.Style
                 Color color = value as Color;
                 _fontColor.setColor(color.alpha, color.red, color.green, color.blue);
                 _font.Color.SetColor(color.alpha, color.red, color.green, color.blue);
-                ;
             }
         }
+        public string scheme { get => _font.Scheme; set => _font.Scheme = value; }
         public bool bold { get => _font.Bold; set => _font.Bold = value; }
+        public bool italic { get => _font.Italic; set => _font.Italic = value; }
+        public bool strike { get => _font.Strike; set => _font.Strike = value; }
+        // if set to false, underLineType will be set to None
+        // if set to true, underLineType will be set to Single
+        public bool underLine { get => _font.UnderLine; set => _font.UnderLine = value; }
+        public int underLineType { get => (int)_font.UnderLineType; set => _font.UnderLineType = (ExcelUnderLineType)value; }
+        # warning BUG: effective only for the first letter
+        public int verticalAlign { get => (int)_font.VerticalAlign; set => _font.VerticalAlign = (ExcelVerticalAlignmentFont)value; }
 
         public bool tryLoadFont(string fontName, int fontSize = 12)
         {
