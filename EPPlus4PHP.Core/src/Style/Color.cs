@@ -21,7 +21,7 @@ namespace nulastudio.Document.EPPlus4PHP.Style
         public const long CYAN_COLOR = 0xFF00FFFF;       // 0.0, 1.0, 1.0 RGB
         public const long YELLOW_COLOR = 0xFFFFFF00;     // 1.0, 1.0, 0.0 RGB
         public const long MAGENTA_COLOR = 0xFFFF00FF;    // 1.0, 0.0, 1.0 RGB
-        public const long ORANGE_COLOR = 0xFF7F007F;     // 1.0, 0.5, 0.0 RGB
+        public const long ORANGE_COLOR = 0xFFFF7F00;     // 1.0, 0.5, 0.0 RGB
         public const long PURPLE_COLOR = 0xFF7F007F;     // 0.5, 0.0, 0.5 RGB
         public const long BROWN_COLOR = 0xFF996633;      // 0.6, 0.4, 0.2 RGB
         public const long CLEAR_COLOR = 0x00000000;      // 0.0 white, 0.0 alpha
