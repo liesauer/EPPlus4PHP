@@ -11,20 +11,16 @@ namespace nulastudio.Document.EPPlus4PHP.Style
     public class Font
     {
         private ExcelFont _font;
+        private Color _fontColor;
         
         public Font(ExcelFont font)
         {
             _font = font;
-        }
-
-        public string name { get => _font.Name; set => _font.Name = value; }
-        public float size { get => _font.Size; set => _font.Size = value; }
-        public int family { get => _font.Family; set => _font.Family = value; }
-        public Color color
-        {
-            get
+            string hexARGB = _font.Color.Rgb;
+            if (string.IsNullOrEmpty(hexARGB))
             {
-                string hexARGB = _font.Color.Rgb;
+                _fontColor = (Color)Color.BLACK_COLOR;
+            } else {
                 string hexA = hexARGB.Substring(0, 2);
                 string hexR = hexARGB.Substring(2, 2);
                 string hexG = hexARGB.Substring(4, 2);
@@ -34,15 +30,24 @@ namespace nulastudio.Document.EPPlus4PHP.Style
                 r = int.Parse(hexR, System.Globalization.NumberStyles.HexNumber);
                 g = int.Parse(hexG, System.Globalization.NumberStyles.HexNumber);
                 b = int.Parse(hexB, System.Globalization.NumberStyles.HexNumber);
-                Color color = new Color(a, r, g, b);
-                // will cause var_dump throwing StackOverflowException
-                // color.ValueChanged += ColorChanged;
-                return color;
+                _fontColor = new Color(a, r, g, b);
             }
+            // will cause var_dump throwing StackOverflowException
+            _fontColor.ValueChanged += ColorChanged;
+        }
+
+        public string name { get => _font.Name; set => _font.Name = value; }
+        public float size { get => _font.Size; set => _font.Size = value; }
+        public int family { get => _font.Family; set => _font.Family = value; }
+        public Color color
+        {
+            get => _fontColor;
             set
             {
                 Color color = value as Color;
+                _fontColor.setColor(color.alpha, color.red, color.green, color.blue);
                 _font.Color.SetColor(color.alpha, color.red, color.green, color.blue);
+                ;
             }
         }
         public bool bold { get => _font.Bold; set => _font.Bold = value; }
@@ -65,8 +70,7 @@ namespace nulastudio.Document.EPPlus4PHP.Style
 
         internal void ColorChanged(object sender, EventArgs e)
         {
-            Color color = sender as Color;
-            _font.Color.SetColor(color.alpha, color.red, color.green, color.blue);
+            this.color = sender as Color;
         }
     }
 }
