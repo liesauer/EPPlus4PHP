@@ -32,7 +32,7 @@ namespace nulastudio.Document.EPPlus4PHP.Style
                 b = int.Parse(hexB, System.Globalization.NumberStyles.HexNumber);
                 _fontColor = new Color(a, r, g, b);
             }
-            // will cause var_dump throwing StackOverflowException
+            #warning will cause var_dump throws StackOverflowException
             _fontColor.ValueChanged += ColorChanged;
         }
 

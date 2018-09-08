@@ -59,9 +59,12 @@ $package = new ExcelPackage(__DIR__ . '/test.xlsx');
 
 // style font verticalAlignmentFont
 // bug: effective only for the first letter
-$package->workBook->workSheets['test sheet']->cells['A1']->style->font->verticalAlign = VerticalAlignmentFont::Superscript;
-var_dump($package->workBook->workSheets['test sheet']->cells['A1']->style->font->verticalAlign);
+// $package->workBook->workSheets['test sheet']->cells['A1']->style->font->verticalAlign = VerticalAlignmentFont::Superscript;
+// var_dump($package->workBook->workSheets['test sheet']->cells['A1']->style->font->verticalAlign);
 
+// style fill
+$package->workBook->workSheets['test sheet']->cells['A1']->style->fill->backgroundColor = 0x00BBCCDD;
+// var_dump($package->workBook->workSheets['test sheet']->cells['A1']->style->fill->backgroundColor);
 
 $package->save();
 
