@@ -9,6 +9,8 @@ use nulastudio\Document\EPPlus4PHP\Style\VerticalAlignmentFont;
 
 $package = new ExcelPackage(__DIR__ . '/test.xlsx');
 
+$worksheet = $package->workBook->workSheets['test sheet'];
+$singleCell = $worksheet->cells['A1'];
 
 // worksheet
 // var_dump(isset($package->workBook->workSheets[1]));
@@ -63,8 +65,19 @@ $package = new ExcelPackage(__DIR__ . '/test.xlsx');
 // var_dump($package->workBook->workSheets['test sheet']->cells['A1']->style->font->verticalAlign);
 
 // style fill
-$package->workBook->workSheets['test sheet']->cells['A1']->style->fill->backgroundColor = 0x00BBCCDD;
+// $package->workBook->workSheets['test sheet']->cells['A1']->style->fill->backgroundColor = 0x00BBCCDD;
 // var_dump($package->workBook->workSheets['test sheet']->cells['A1']->style->fill->backgroundColor);
+
+// style border
+use nulastudio\Document\EPPlus4PHP\Style\BorderStyle;
+$singleCell->style->border->top->style = BorderStyle::Dotted;
+$singleCell->style->border->top->color = 0x00BBCCDD;
+$singleCell->style->border->bottom->style = BorderStyle::Dotted;
+$singleCell->style->border->bottom->color = Color::GREEN_COLOR;
+$singleCell->style->border->diagonal->style = BorderStyle::Dashed;
+$singleCell->style->border->diagonal->color = Color::BLUE_COLOR;
+$singleCell->style->border->diagonalUp = true;
+$singleCell->style->border->diagonalDown = true;
 
 $package->save();
 
