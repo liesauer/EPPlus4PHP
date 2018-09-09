@@ -5,10 +5,11 @@ using SysFont = System.Drawing.Font;
 using Pchp.Core;
 using Pchp.Library;
 using OfficeOpenXml.Style;
+using nulastudio.KVO;
 
 namespace nulastudio.Document.EPPlus4PHP.Style
 {
-    public class Font
+    public class Font : ValueChanged
     {
         private ExcelFont _font;
         private Color _fontColor;
@@ -33,7 +34,7 @@ namespace nulastudio.Document.EPPlus4PHP.Style
                 _fontColor = new Color(a, r, g, b);
             }
             #warning will cause var_dump throws StackOverflowException
-            _fontColor.ValueChanged += ColorChanged;
+            _fontColor.OnValueChanged += ColorChanged;
         }
 
         public string name { get => _font.Name; set => _font.Name = value; }
@@ -76,7 +77,7 @@ namespace nulastudio.Document.EPPlus4PHP.Style
             }
         }
 
-        internal void ColorChanged(object sender, EventArgs e)
+        internal void ColorChanged(object sender, ValueChangedEventArgs e)
         {
             this.color = sender as Color;
         }

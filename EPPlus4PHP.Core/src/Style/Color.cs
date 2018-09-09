@@ -5,10 +5,11 @@ using SysFont = System.Drawing.Font;
 using Pchp.Core;
 using Pchp.Library;
 using OfficeOpenXml.Style;
+using nulastudio.KVO;
 
 namespace nulastudio.Document.EPPlus4PHP.Style
 {
-    public class Color
+    public class Color : ValueChanged
     {
         public const long BLACK_COLOR = 0xFF000000;      // 0.0 white
         public const long DARKGRAY_COLOR = 0xFF555555;   // 0.333 white
@@ -30,8 +31,6 @@ namespace nulastudio.Document.EPPlus4PHP.Style
         private int _green;
         private int _blue;
 
-        public event EventHandler<EventArgs> ValueChanged;
-
         public Color() : this(0, 255, 255, 255)
         {
         }
@@ -48,8 +47,9 @@ namespace nulastudio.Document.EPPlus4PHP.Style
             get => _alpha;
             set
             {
+                int oldValue = _alpha;
                 _alpha = value & 0xFF;
-                OnValueChanged(new EventArgs());
+                TriggerValueChanged(new ValueChangedEventArgs("alpha", oldValue, _alpha));
             }
         }
         public int red
@@ -57,8 +57,9 @@ namespace nulastudio.Document.EPPlus4PHP.Style
             get => _red;
             set
             {
+                int oldValue = _red;
                 _red = value & 0xFF;
-                OnValueChanged(new EventArgs());
+                TriggerValueChanged(new ValueChangedEventArgs("red", oldValue, _red));
             }
         }
         public int green
@@ -66,8 +67,9 @@ namespace nulastudio.Document.EPPlus4PHP.Style
             get => _green;
             set
             {
+                int oldValue = _green;
                 _green = value & 0xFF;
-                OnValueChanged(new EventArgs());
+                TriggerValueChanged(new ValueChangedEventArgs("green", oldValue, _green));
             }
         }
         public int blue
@@ -75,8 +77,9 @@ namespace nulastudio.Document.EPPlus4PHP.Style
             get => _blue;
             set
             {
+                int oldValue = _blue;
                 _blue = value & 0xFF;
-                OnValueChanged(new EventArgs());
+                TriggerValueChanged(new ValueChangedEventArgs("blue", oldValue, _blue));
             }
         }
 
@@ -91,14 +94,6 @@ namespace nulastudio.Document.EPPlus4PHP.Style
         public static implicit operator long(Color color)
         {
             return color.alpha << 24 & color.red << 16 & color.green << 8 & color.blue;
-        }
-
-        protected virtual void OnValueChanged(EventArgs e)
-        {
-            if (ValueChanged != null)
-            {
-                ValueChanged(this, e);
-            }
         }
 
         // will not trigger valuechanged

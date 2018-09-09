@@ -2,6 +2,7 @@ using System;
 using Pchp.Core;
 using Pchp.Library;
 using OfficeOpenXml.Style;
+using nulastudio.KVO;
 
 namespace nulastudio.Document.EPPlus4PHP.Style
 {
@@ -32,7 +33,7 @@ namespace nulastudio.Document.EPPlus4PHP.Style
                 _backgroundColor = new Color(a, r, g, b);
             }
             #warning will cause var_dump throws StackOverflowException
-            _backgroundColor.ValueChanged += BackgroundColorChanged;
+            _backgroundColor.OnValueChanged += BackgroundColorChanged;
         }
 
         public Color backgroundColor
@@ -46,7 +47,7 @@ namespace nulastudio.Document.EPPlus4PHP.Style
                 _fill.BackgroundColor.SetColor(color.alpha, color.red, color.green, color.blue);
             }
         }
-        internal void BackgroundColorChanged(object sender, EventArgs e)
+        internal void BackgroundColorChanged(object sender, ValueChangedEventArgs e)
         {
             this.backgroundColor = sender as Color;
         }

@@ -2,6 +2,7 @@ using System;
 using Pchp.Core;
 using Pchp.Library;
 using OfficeOpenXml.Style;
+using nulastudio.KVO;
 
 namespace nulastudio.Document.EPPlus4PHP.Style
 {
@@ -32,7 +33,7 @@ namespace nulastudio.Document.EPPlus4PHP.Style
                 _color = new Color(a, r, g, b);
             }
             #warning will cause var_dump throws StackOverflowException
-            _color.ValueChanged += ColorChanged;
+            _color.OnValueChanged += ColorChanged;
         }
 
         public int style { get => (int)_borderItem.Style; set => _borderItem.Style = (ExcelBorderStyle)value; }
@@ -47,7 +48,7 @@ namespace nulastudio.Document.EPPlus4PHP.Style
             }
         }
 
-        internal void ColorChanged(object sender, EventArgs e)
+        internal void ColorChanged(object sender, ValueChangedEventArgs e)
         {
             this.color = sender as Color;
         }
