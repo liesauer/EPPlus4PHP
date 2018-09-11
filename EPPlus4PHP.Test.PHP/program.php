@@ -80,7 +80,22 @@ $singleCell = $worksheet->cells['A1'];
 // $singleCell->style->border->diagonalDown = true;
 
 // style numberformat
-$singleCell->style->numberFormat->format = 'yyyy/m/d h:mm';
+// $singleCell->style->numberFormat->format = 'yyyy/m/d h:mm';
+
+// reading and writting
+// single cell
+var_dump($worksheet->cells['A1']->value);
+// multi rows
+// var_dump($worksheet->cells['1']->value);
+foreach ($worksheet->datas->value as $value) {
+    var_dump($value);
+}
+// multi columns
+var_dump($worksheet->cells['A1:C1']->value);
+// mutli datas
+var_dump($worksheet->cells['A1:C20']->value);
+
+
 
 $package->save();
 

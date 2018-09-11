@@ -18,5 +18,6 @@ namespace nulastudio.Document.EPPlus4PHP
         public bool is1Base { get => _is1Base; }
         public string name { get => _workSheet.Name; }
         public Range cells { get =>new Range(_workSheet.Cells, is1Base); }
+        public Range datas { get => cells[_workSheet.Dimension.Address]; }
     }
 }

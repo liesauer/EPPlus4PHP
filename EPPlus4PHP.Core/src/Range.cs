@@ -30,6 +30,11 @@ namespace nulastudio.Document.EPPlus4PHP
 
         public bool is1Base { get => _is1Base; }
         public Style.Style style { get => _style; }
+        public object value
+        {
+            get => _range.Value;
+            set => _range.Value = value;
+        }
 
         #region Indexer
         public Range this[string address]
@@ -45,7 +50,11 @@ namespace nulastudio.Document.EPPlus4PHP
             IntStringKey key = default(IntStringKey);
             if (offset.TryToIntStringKey(out key))
             {
-                return PhpValue.FromClr(this[key.String]);
+                string address = key.Object.ToString();
+                if (tryParseAddress(address, out address))
+                {
+                    return PhpValue.FromClr(this[address]);
+                }
             }
             return PhpValue.Null;
         }
