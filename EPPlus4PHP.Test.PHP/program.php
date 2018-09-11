@@ -80,7 +80,7 @@ $singleCell = $worksheet->cells['A1'];
 // $singleCell->style->border->diagonalDown = true;
 
 // style numberformat
-$singleCell->style->numberFormat->format = '#,##,###';
+$singleCell->style->numberFormat->format = 'yyyy/m/d h:mm';
 
 $package->save();
 
