@@ -69,15 +69,18 @@ $singleCell = $worksheet->cells['A1'];
 // var_dump($package->workBook->workSheets['test sheet']->cells['A1']->style->fill->backgroundColor);
 
 // style border
-use nulastudio\Document\EPPlus4PHP\Style\BorderStyle;
-$singleCell->style->border->top->style = BorderStyle::Dotted;
-$singleCell->style->border->top->color = 0x00BBCCDD;
-$singleCell->style->border->bottom->style = BorderStyle::Dotted;
-$singleCell->style->border->bottom->color = Color::GREEN_COLOR;
-$singleCell->style->border->diagonal->style = BorderStyle::Dashed;
-$singleCell->style->border->diagonal->color = Color::BLUE_COLOR;
-$singleCell->style->border->diagonalUp = true;
-$singleCell->style->border->diagonalDown = true;
+// use nulastudio\Document\EPPlus4PHP\Style\BorderStyle;
+// $singleCell->style->border->top->style = BorderStyle::Dotted;
+// $singleCell->style->border->top->color = 0x00BBCCDD;
+// $singleCell->style->border->bottom->style = BorderStyle::Dotted;
+// $singleCell->style->border->bottom->color = Color::GREEN_COLOR;
+// $singleCell->style->border->diagonal->style = BorderStyle::Dashed;
+// $singleCell->style->border->diagonal->color = Color::BLUE_COLOR;
+// $singleCell->style->border->diagonalUp = true;
+// $singleCell->style->border->diagonalDown = true;
+
+// style numberformat
+$singleCell->style->numberFormat->format = '#,##,###';
 
 $package->save();
 
