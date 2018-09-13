@@ -30,10 +30,82 @@ namespace nulastudio.Document.EPPlus4PHP
 
         public bool is1Base { get => _is1Base; }
         public Style.Style style { get => _style; }
-        public object value
+        public string address { get => _range.Address; }
+        public string fullAddress { get => _range.FullAddress; }
+        public string fullAddressAbsolute { get => _range.FullAddressAbsolute; }
+        public string from { get => _range.Start.Address; }
+        public int fromRow { get => _range.Start.Row; }
+        public int fromColumn { get => _range.Start.Column; }
+        public string to { get => _range.End.Address; }
+        public int toRow { get => _range.End.Row; }
+        public int toColumn { get => _range.End.Column; }
+        public int rows { get => _range.Rows; }
+        public int columns { get => _range.Columns; }
+        public PhpValue value
         {
-            get => _range.Value;
-            set => _range.Value = value;
+            get
+            {
+                if (_range.Value is object[,])
+                {
+                    object[,] data = _range.Value as object[,];
+                    int rows = data.GetLength(0);
+                    PhpArray arr = new PhpArray();
+                    for (int i = 0; i < rows; i++)
+                    {
+                        PhpArray rowData = new PhpArray();
+                        int columns = data.GetLength(1);
+                        for (int j = 0; j < columns; j++)
+                        {
+                            rowData.AddValue(PhpValue.FromClr(data.GetValue(i,j)));
+                        }
+                        arr.AddValue(PhpValue.Create(rowData));
+                    }
+                    return arr;
+                }
+                else
+                {
+                    return PhpValue.FromClr(_range.Value);
+                }
+            }
+            set
+            {
+                if (value.IsArray)
+                {
+                    List<List<object>> data = new List<List<object>>();
+                    foreach (KeyValuePair<IntStringKey, PhpValue> item in value.ToArray())
+                    {
+                        if (item.Value.IsArray)
+                        {
+                            List<object> rowData = new List<object>();
+                            foreach (KeyValuePair<IntStringKey, PhpValue> cell in item.Value.ToArray())
+                            {
+                                rowData.Add(cell.Value.ToClr());
+                            }
+                            data.Add(rowData);
+                        } else {
+                            data.Add(new List<object>(){item.Value.ToClr()});
+                        }
+                    }
+
+                    int fromRow = this.fromRow;
+                    int fromColumn = this.fromColumn;
+                    int row = Math.Min(rows, data.Count);
+                    int column = Math.Min(columns, data.Count == 0 ? 0 : data[0].Count);
+                    for (int i = 0; i < row; i++)
+                    {
+                        for (int j = 0; j < column; j++)
+                        {
+                            _range[fromRow + i, fromColumn + j].Value = data[i][j];
+                        }
+                    }
+
+                    ;
+                }
+                else
+                {
+                    _range.Value = value.ToClr();
+                }
+            }
         }
 
         #region Indexer

@@ -84,14 +84,23 @@ $singleCell = $worksheet->cells['A1'];
 
 // reading and writting
 // single cell
-var_dump($worksheet->cells['A1']->value);
+// var_dump($worksheet->cells['A1']->value);
 // multi rows
 // var_dump($worksheet->cells['1']->value);
-foreach ($worksheet->datas->value as $value) {
-    var_dump($value);
-}
+// foreach ($worksheet->datas->value as $value) {
+//     var_dump($value);
+// }
 // multi columns
-var_dump($worksheet->cells['A1:C1']->value);
+// var_dump($worksheet->datas->value);
+// var_dump($worksheet->cells['A1:A5']->value);
+$data = $worksheet->cells['1:3']->value = [
+    [1,2,3,4,5,6,7,8,9],
+    [9,9,9,9,9,9,9,9,9],
+    [0,0,0,0,0,0,0,0,9],
+];
+$package->save();
+var_dump(count($data));
+var_dump(count($data[0]));
 // mutli datas
 var_dump($worksheet->cells['A1:C20']->value);
 
