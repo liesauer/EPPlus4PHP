@@ -28,6 +28,8 @@ namespace nulastudio.Document.EPPlus4PHP.Style
         public Fill fill { get => _fill; }
         public Border border { get => _border; }
         public NumberFormat numberFormat { get => _numberFormat; }
+        public int horizontalAlignment { get => (int)_style.HorizontalAlignment; set => _style.HorizontalAlignment = (ExcelHorizontalAlignment)value; }
+        public int verticalAlignment { get => (int)_style.VerticalAlignment; set => _style.VerticalAlignment = (ExcelVerticalAlignment)value; }
 
         internal void NumberFormatChanged(object sender, ValueChangedEventArgs e)
         {

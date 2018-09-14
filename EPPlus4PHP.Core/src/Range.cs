@@ -107,6 +107,18 @@ namespace nulastudio.Document.EPPlus4PHP
                 }
             }
         }
+        public bool merge
+        {
+            get => _range.Merge;
+            set
+            {
+                try
+                {
+                    _range.Merge = value;
+                }
+                catch {}
+            }
+        }
 
         #region Indexer
         public Range this[string address]
