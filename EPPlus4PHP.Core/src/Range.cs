@@ -87,6 +87,16 @@ namespace nulastudio.Document.EPPlus4PHP
                         }
                     }
 
+                    // 不定长数组补齐
+                    int maxColumn = data.OrderByDescending(list => list.Count).First().Count;
+                    foreach (List<object> list in data)
+                    {
+                        for (int i = list.Count; i < maxColumn; i++)
+                        {
+                            list.Add("");
+                        }
+                    }
+
                     int fromRow = this.fromRow;
                     int fromColumn = this.fromColumn;
                     int row = Math.Min(rows, data.Count);

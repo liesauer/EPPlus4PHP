@@ -93,11 +93,11 @@ $singleCell = $worksheet->cells['A1'];
 // multi columns
 // var_dump($worksheet->datas->value);
 // var_dump($worksheet->cells['A1:A5']->value);
-// $data = $worksheet->cells['1:3']->value = [
-//     [1,2,3,4,5,6,7,8,9],
-//     [9,9,9,9,9,9,9,9,9],
-//     [0,0,0,0,0,0,0,0,9],
-// ];
+$worksheet->cells['1:3']->value = [
+    [1,2,3,4,5,6,7,8,9],
+    [9,9,9],
+    [0,0,0,0,0,9],
+];
 // $package->save();
 // var_dump(count($data));
 // var_dump(count($data[0]));
@@ -105,14 +105,14 @@ $singleCell = $worksheet->cells['A1'];
 // var_dump($worksheet->cells['A1:C20']->value);
 
 // merge
-$worksheet->cells['A1:C1']->merge = true;
-$worksheet->cells['A1:C2']->merge = true;
+// $worksheet->cells['A1:C1']->merge = true;
+// $worksheet->cells['A1:C2']->merge = true;
 
 // alignment
-use nulastudio\Document\EPPlus4PHP\Style\HorizontalAlignment;
-use nulastudio\Document\EPPlus4PHP\Style\VerticalAlignment;
-$worksheet->cells['A1:C2']->style->horizontalAlignment = HorizontalAlignment::Right;
-$worksheet->cells['A1:C2']->style->verticalAlignment = VerticalAlignment::Top;
+// use nulastudio\Document\EPPlus4PHP\Style\HorizontalAlignment;
+// use nulastudio\Document\EPPlus4PHP\Style\VerticalAlignment;
+// $worksheet->cells['A1:C2']->style->horizontalAlignment = HorizontalAlignment::Right;
+// $worksheet->cells['A1:C2']->style->verticalAlignment = VerticalAlignment::Top;
 
 
 $package->save();
