@@ -16,9 +16,17 @@ namespace nulastudio.Document.EPPlus4PHP
         public ExcelPackage(Context ctx, PhpString fileName) : this(ctx, fileName.ToString(ctx))
         {
         }
+        public ExcelPackage(Context ctx, PhpString fileName, PhpString password) : this(ctx, fileName.ToString(ctx), password.ToString(ctx))
+        {
+        }
         public ExcelPackage(Context ctx, string fileName)
         {
             _excelPackage = new EPExcelPackage(new FileInfo(fileName));
+            _workBook = new WorkBook(_excelPackage.Workbook, _excelPackage.Compatibility.IsWorksheets1Based);
+        }
+        public ExcelPackage(Context ctx, string fileName, string password)
+        {
+            _excelPackage = new EPExcelPackage(new FileInfo(fileName), password);
             _workBook = new WorkBook(_excelPackage.Workbook, _excelPackage.Compatibility.IsWorksheets1Based);
         }
         public static ExcelPackage open(Context ctx, PhpString fileName)
@@ -29,14 +37,59 @@ namespace nulastudio.Document.EPPlus4PHP
         {
             return new ExcelPackage(ctx, fileName);
         }
-        public void save(Context ctx)
+        public static ExcelPackage open(Context ctx, PhpString fileName, PhpString password)
+        {
+            return open(ctx, fileName.ToString(ctx), password.ToString(ctx));
+        }
+        public static ExcelPackage open(Context ctx, string fileName, string password)
+        {
+            return new ExcelPackage(ctx, fileName, password);
+        }
+        public void save()
+        {
+            save(_excelPackage.Encryption.Password);
+        }
+        public void save(Context ctx, PhpString password)
+        {
+            save(password.ToString(ctx));
+        }
+        public void save(string password = null)
+        {
+            if (string.IsNullOrEmpty(password))
+            {
+                password = null;
+            }
+            checkWorkbookIsEmpty();
+            _excelPackage.Save(password);
+        }
+        public void saveAs(string file)
+        {
+            saveAs(file, _excelPackage.Encryption.Password);
+        }
+        public void saveAs(Context ctx, PhpString file)
+        {
+            saveAs(file.ToString(ctx));
+        }
+        public void saveAs(Context ctx, PhpString file, PhpString password)
+        {
+            saveAs(file.ToString(ctx), password.ToString(ctx));
+        }
+        public void saveAs(string file, string password = null)
+        {
+            if (string.IsNullOrEmpty(password))
+            {
+                password = null;
+            }
+            checkWorkbookIsEmpty();
+            _excelPackage.SaveAs(new FileInfo(file), password);
+        }
+        private void checkWorkbookIsEmpty()
         {
             // 空白工作簿将出错
             if (_excelPackage.Workbook.Worksheets.Count == 0)
             {
                 _excelPackage.Workbook.Worksheets.Add("sheet1");
             }
-            _excelPackage.Save();
         }
 
         public WorkBook workBook { get => _workBook; }

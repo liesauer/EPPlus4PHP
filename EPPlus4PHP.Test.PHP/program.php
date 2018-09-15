@@ -115,7 +115,12 @@ $worksheet->cells['1:3']->value = [
 // $worksheet->cells['A1:C2']->style->verticalAlignment = VerticalAlignment::Top;
 
 
-$package->save();
+// $package->save("test2");
+
+// save/saveAs
+// $package->saveAs(__DIR__ . '/test2.xlsx');
+// $package->saveAs(__DIR__ . '/test2_pwd.xlsx', 'test');
+
 
 // var_dump($package);
 
@@ -145,4 +150,4 @@ $package->save();
 // $package->workBook->workSheets['test sheet']->cells['A1']->font->size = 50;
 
 
-// $package->save();
+$package->save();
