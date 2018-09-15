@@ -197,5 +197,40 @@ namespace nulastudio.Document.EPPlus4PHP
         }
         #endregion
 
+        #region Movement
+        public void moveBefore(string sourceName, string targetName)
+        {
+            try
+            {
+                _workSheets.MoveBefore(sourceName, targetName);
+            }
+            catch {}
+        }
+        public void moveAfter(string sourceName, string targetName)
+        {
+            try
+            {
+                _workSheets.MoveAfter(sourceName, targetName);
+            }
+            catch {}
+        }
+        public void moveToStart(string sourceName)
+        {
+            try
+            {
+                _workSheets.MoveToStart(sourceName);
+            }
+            catch {}
+        }
+        public void moveToEnd(string sourceName)
+        {
+            try
+            {
+                _workSheets.MoveToEnd(sourceName);
+            }
+            catch {}
+        }
+        #endregion
+
     }
 }

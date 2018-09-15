@@ -19,5 +19,40 @@ namespace nulastudio.Document.EPPlus4PHP
         public string name { get => _workSheet.Name; }
         public Range cells { get =>new Range(_workSheet.Cells, is1Base); }
         public Range datas { get => cells[_workSheet.Dimension.Address]; }
+
+        #region Movement
+        public void moveBefore(string targetName)
+        {
+            try
+            {
+                _workSheet.Workbook.Worksheets.MoveBefore(name, targetName);
+            }
+            catch {}
+        }
+        public void moveAfter(string targetName)
+        {
+            try
+            {
+                _workSheet.Workbook.Worksheets.MoveAfter(name, targetName);
+            }
+            catch {}
+        }
+        public void moveToStart()
+        {
+            try
+            {
+                _workSheet.Workbook.Worksheets.MoveToStart(name);
+            }
+            catch {}
+        }
+        public void moveToEnd(string sourceName)
+        {
+            try
+            {
+                _workSheet.Workbook.Worksheets.MoveToEnd(name);
+            }
+            catch {}
+        }
+        #endregion
     }
 }
