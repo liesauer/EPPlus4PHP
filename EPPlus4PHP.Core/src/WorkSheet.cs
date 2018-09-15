@@ -54,5 +54,28 @@ namespace nulastudio.Document.EPPlus4PHP
             catch {}
         }
         #endregion
+
+        #region Cell RW
+        public void addRow(Context ctx, PhpArray row)
+        {
+            int rowIndex = datas.toRow + 1;
+            int startColumn = 1;
+            foreach (PhpValue item in row.Values)
+            {
+                string columnName = ExcelConvert.toName(startColumn++);
+                cells[string.Format("{0}{1}",columnName,rowIndex)].value = item;
+            }
+        }
+        public void addColumn(Context ctx, PhpArray column)
+        {
+            int columnIndex = datas.toColumn + 1;
+            string columnName = ExcelConvert.toName(columnIndex);
+            int startRow = 1;
+            foreach (PhpValue item in column.Values)
+            {
+                cells[string.Format("{0}{1}", columnName, startRow++)].value = item;
+            }
+        }
+        #endregion
     }
 }

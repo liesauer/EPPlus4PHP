@@ -93,11 +93,11 @@ $singleCell = $worksheet->cells['A1'];
 // multi columns
 // var_dump($worksheet->datas->value);
 // var_dump($worksheet->cells['A1:A5']->value);
-$worksheet->cells['1:3']->value = [
-    [1,2,3,4,5,6,7,8,9],
-    [9,9,9],
-    [0,0,0,0,0,9],
-];
+// $worksheet->cells['1:3']->value = [
+//     [1,2,3,4,5,6,7,8,9],
+//     [9,9,9],
+//     [0,0,0,0,0,9],
+// ];
 // $package->save();
 // var_dump(count($data));
 // var_dump(count($data[0]));
@@ -121,6 +121,28 @@ $worksheet->cells['1:3']->value = [
 // $package->saveAs(__DIR__ . '/test2.xlsx');
 // $package->saveAs(__DIR__ . '/test2_pwd.xlsx', 'test');
 
+
+// add row
+// $datas = [
+//     [1,2,3,4,5,6,7],
+//     [8,8,8,8,8,8,8,8],
+//     [2,2,2,2,2,2,2,2],
+//     ['1','','qq','wa','asd','ppp'],
+// ];
+// foreach ($datas as $data) {
+//     $worksheet->addRow($data);
+// }
+
+// add column
+// $datas = [
+//     ['|',1, 2, 3, 4, 5, 6, 7],
+//     ['|',8, 8, 8, 8, 8, 8, 8, 8],
+//     ['|',2, 2, 2, 2, 2, 2, 2, 2],
+//     ['|','1', '', 'qq', 'wa', 'asd', 'ppp'],
+// ];
+// foreach ($datas as $data) {
+//     $worksheet->addColumn($data);
+// }
 
 // var_dump($package);
 
