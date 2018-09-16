@@ -9,6 +9,7 @@
     <Description>EPPlus4PHP, written with peachpie.</Description>
     <Version>0.1.0.1141-beta</Version>
     <Product>nulastudio.Document.EPPlus4PHP</Product>
+    <PackageProjectUrl>https://github.com/liesauer/EPPlus4PHP</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
