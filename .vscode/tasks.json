@@ -22,6 +22,17 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "label": "build-Release",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "build",
+                "-c=Release",
+                "${workspaceFolder}/EPPlus4PHP.Core/EPPlus4PHP.Core.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
             "label": "publish",
             "command": "dotnet",
             "type": "shell",

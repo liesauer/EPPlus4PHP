@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>nulastudio.Document.EPPlus4PHP</PackageId>
-    <Authors>LiesAUer</Authors>
+    <Authors>LiesAuer</Authors>
     <Company>nulastudio</Company>
     <Description>EPPlus4PHP, written with peachpie.</Description>
     <Version>0.1.0.1141-beta</Version>
