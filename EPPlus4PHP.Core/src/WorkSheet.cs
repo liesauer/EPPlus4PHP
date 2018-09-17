@@ -18,7 +18,18 @@ namespace nulastudio.Document.EPPlus4PHP
         public bool is1Base { get => _is1Base; }
         public string name { get => _workSheet.Name; }
         public Range cells { get =>new Range(_workSheet.Cells, is1Base); }
-        public Range datas { get => cells[_workSheet.Dimension.Address]; }
+        public bool hasData { get => _workSheet.Dimension != null; }
+        public Range datas
+        {
+            get
+            {
+                if (hasData)
+                {
+                    return cells[_workSheet.Dimension.Address];
+                }
+                return null;
+            }
+        }
 
         #region Movement
         public void moveBefore(string targetName)
@@ -58,7 +69,7 @@ namespace nulastudio.Document.EPPlus4PHP
         #region Cell RW
         public void addRow(Context ctx, PhpArray row)
         {
-            int rowIndex = datas.toRow + 1;
+            int rowIndex = (hasData ? datas.toRow : 0) + 1;
             int startColumn = 1;
             foreach (PhpValue item in row.Values)
             {
@@ -68,7 +79,7 @@ namespace nulastudio.Document.EPPlus4PHP
         }
         public void addColumn(Context ctx, PhpArray column)
         {
-            int columnIndex = datas.toColumn + 1;
+            int columnIndex = (hasData ? datas.toColumn : 0) + 1;
             string columnName = ExcelConvert.toName(columnIndex);
             int startRow = 1;
             foreach (PhpValue item in column.Values)

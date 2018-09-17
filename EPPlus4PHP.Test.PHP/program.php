@@ -7,10 +7,14 @@ use nulastudio\Document\EPPlus4PHP\Style\Color;
 use nulastudio\Document\EPPlus4PHP\Style\UnderLineType;
 use nulastudio\Document\EPPlus4PHP\Style\VerticalAlignmentFont;
 
-$package = new ExcelPackage(__DIR__ . '/test.xlsx');
+$package = new ExcelPackage(__DIR__ . '/test3.xlsx');
 
 $worksheet = $package->workBook->workSheets['test sheet'];
 $singleCell = $worksheet->cells['A1'];
+// $worksheet->addRow([1,2,3,4,5]);
+// $package->save();
+// die;
+
 
 // worksheet
 // var_dump(isset($package->workBook->workSheets[1]));
@@ -123,15 +127,15 @@ $singleCell = $worksheet->cells['A1'];
 
 
 // add row
-// $datas = [
-//     [1,2,3,4,5,6,7],
-//     [8,8,8,8,8,8,8,8],
-//     [2,2,2,2,2,2,2,2],
-//     ['1','','qq','wa','asd','ppp'],
-// ];
-// foreach ($datas as $data) {
-//     $worksheet->addRow($data);
-// }
+$datas = [
+    [1,2,3,4,5,6,7],
+    [8,8,8,8,8,8,8,8],
+    [2,2,2,2,2,2,2,2],
+    ['1','','qq','wa','asd','ppp'],
+];
+foreach ($datas as $data) {
+    $worksheet->addRow($data);
+}
 
 // add column
 // $datas = [
