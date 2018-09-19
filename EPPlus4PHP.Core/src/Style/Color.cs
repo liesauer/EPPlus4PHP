@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Drawing.Text;
+using System.Text.RegularExpressions;
 using SysFont = System.Drawing.Font;
 using Pchp.Core;
 using Pchp.Library;
@@ -31,7 +32,7 @@ namespace nulastudio.Document.EPPlus4PHP.Style
         private int _green;
         private int _blue;
 
-        public Color() : this(0, 255, 255, 255)
+        public Color() : this(255, 255, 255, 255)
         {
         }
         public Color(int alpha, int red, int green, int blue)
@@ -83,6 +84,7 @@ namespace nulastudio.Document.EPPlus4PHP.Style
             }
         }
 
+        // 0xAARRGGBB
         public static implicit operator Color(long aRBG)
         {
             int alpha = (int)((aRBG & 0xFF000000) >> 24);
@@ -90,6 +92,30 @@ namespace nulastudio.Document.EPPlus4PHP.Style
             int green = (int)((aRBG & 0xFF00) >> 8);
             int blue = (int)(aRBG & 0xFF);
             return new Color(alpha, red, green, blue);
+        }
+
+        // #AARRGGBB | #RRGGBB
+        public static implicit operator Color(string hex)
+        {
+            if (!Regex.IsMatch(hex, @"^\#[0-9a-fA-F]{6}$") && !Regex.IsMatch(hex, @"^\#[0-9a-fA-F]{8}$"))
+            {
+                return new Color();
+            }
+            if (hex.Length == 7)
+            {
+                hex = "#FF" + hex.Substring(1, 6);
+            }
+            hex = hex.Substring(1, 8);
+            string hexA = hex.Substring(0, 2);
+            string hexR = hex.Substring(2, 2);
+            string hexG = hex.Substring(4, 2);
+            string hexB = hex.Substring(6, 2);
+            int a = 0, r = 0, g = 0, b = 0;
+            a = int.Parse(hexA, System.Globalization.NumberStyles.HexNumber) & 0xFF;
+            r = int.Parse(hexR, System.Globalization.NumberStyles.HexNumber) & 0xFF;
+            g = int.Parse(hexG, System.Globalization.NumberStyles.HexNumber) & 0xFF;
+            b = int.Parse(hexB, System.Globalization.NumberStyles.HexNumber) & 0xFF;
+            return new Color(a, r, g, b);
         }
         public static implicit operator long(Color color)
         {

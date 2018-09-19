@@ -16,7 +16,7 @@ namespace nulastudio.Document.EPPlus4PHP
         public const string REGEX_SINGLE_CELL = "^[A-Z]+[1-9][0-9]*$";
         public const string REGEX_SINGLE_ROW = "^[1-9][0-9]*:[1-9][0-9]*$";
         public const string REGEX_SINGLE_COLUMN = "^[A-Z]+:[A-Z]+$";
-        public const string REGEX_MULTI_CELLS = "^^[A-Z]+[1-9][0-9]*:[A-Z]+[1-9][0-9]*$";
+        public const string REGEX_MULTI_CELLS = "^[A-Z]+[1-9][0-9]*:[A-Z]+[1-9][0-9]*$";
 
         private ExcelRange _range;
         private Style.Style _style;

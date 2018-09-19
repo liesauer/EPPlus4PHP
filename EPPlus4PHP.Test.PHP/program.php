@@ -47,13 +47,13 @@ $singleCell = $worksheet->cells['A1'];
 // var_dump(Range::tryParseAddress("a,1,1:1,a2,88888888,1q:q1,a2:a5", $tmp_addr), $tmp_addr); // n
 
 // style font color
-// $package->workBook->workSheets['test sheet']->cells['A1']->style->font->color = 0x00BBCCDD;
-// $color = $package->workBook->workSheets['test sheet']->cells['A1']->style->font->color;
-// // var_dump($color);
+$package->workBook->workSheets['test sheet']->cells['A1']->style->font->color = '#AABBCC';
+$color = $package->workBook->workSheets['test sheet']->cells['A1']->style->font->color;
+var_dump($color);
 // $package->workBook->workSheets['test sheet']->cells['A1']->style->font->size = 50;
 
 // $color->alpha = 0xBB;
-
+exit;
 // style font underLineType
 // $package->workBook->workSheets['test sheet']->cells['A1']->style->font->underLine = true;
 // $package->workBook->workSheets['test sheet']->cells['A1']->style->font->underLineType = UnderLineType::Double;
