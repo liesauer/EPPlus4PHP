@@ -33,6 +33,38 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "label": "pack",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "pack",
+                "-c=Release",
+                "${workspaceFolder}/EPPlus4PHP.Core/EPPlus4PHP.Core.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "push",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "nuget",
+                "push",
+                "-k=token",
+                "-s=https://api.nuget.org/v3/index.json",
+                "/Users/imac/Projects/EPPlus4PHP/EPPlus4PHP.Core/bin/Release/nulastudio.Document.EPPlus4PHP.0.1.4-CI01141.nupkg"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build and publish nuget",
+            "dependsOn":[
+                "push",
+                "pack"
+            ],
+            "problemMatcher": []
+        },
+        {
             "label": "publish",
             "command": "dotnet",
             "type": "shell",
