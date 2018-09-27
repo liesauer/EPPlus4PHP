@@ -56,7 +56,7 @@ namespace nulastudio.Document.EPPlus4PHP
             }
             catch {}
         }
-        public void moveToEnd(string sourceName)
+        public void moveToEnd()
         {
             try
             {
