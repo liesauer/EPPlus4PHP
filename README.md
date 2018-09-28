@@ -1,5 +1,13 @@
-# EPPlus4PHP
-[EPPlus4PHP手册](http://docs.epplus4php.nulastudio.org/)
+<h1 align="center">
+  EPPlus4PHP
+</h1>
+
+<p align="center">
+  <a href="https://www.nuget.org/packages/nulastudio.Document.EPPlus4PHP"><img src="https://img.shields.io/nuget/v/nulastudio.Document.EPPlus4PHP.svg"></a>
+  <a href="http://docs.epplus4php.nulastudio.org/"><img src="https://img.shields.io/badge/docs-docs.epplus4php.nulastudio.org-green.svg"></a>
+  <a href="https://gitter.im/nulastudio/EPPlus4PHP"><img src="https://badges.gitter.im/nulastudio/EPPlus4PHP.svg"></a>
+</p>
+
 
 ## EPPlus4PHP是什么
 
