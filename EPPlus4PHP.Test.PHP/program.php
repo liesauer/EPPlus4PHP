@@ -15,6 +15,10 @@ $singleCell = $worksheet->cells['A1'];
 // $package->save();
 // die;
 
+var_dump($worksheet->address);
+var_dump($worksheet->fullAddress);
+var_dump($worksheet->fullAddressAbsolute);
+
 $package->workBook->workSheets->add('a');
 $package->workBook->workSheets->add('b');
 $package->workBook->workSheets->add('c');
