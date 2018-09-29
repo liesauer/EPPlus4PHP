@@ -7,28 +7,28 @@ use nulastudio\Document\EPPlus4PHP\Style\Color;
 use nulastudio\Document\EPPlus4PHP\Style\UnderLineType;
 use nulastudio\Document\EPPlus4PHP\Style\VerticalAlignmentFont;
 
-$package = new ExcelPackage(__DIR__ . '/test3.xlsx');
+$package = new ExcelPackage(__DIR__ . '/test.xlsx');
 
-$worksheet = $package->workBook->workSheets['test sheet'];
+$worksheet = $package->workBook->workSheets['sheet2'];
 $singleCell = $worksheet->cells['A1'];
 // $worksheet->addRow([1,2,3,4,5]);
 // $package->save();
 // die;
 
-var_dump($worksheet->address);
-var_dump($worksheet->fullAddress);
-var_dump($worksheet->fullAddressAbsolute);
+// var_dump($worksheet->address);
+// var_dump($worksheet->fullAddress);
+// var_dump($worksheet->fullAddressAbsolute);
 
-$package->workBook->workSheets->add('a');
-$package->workBook->workSheets->add('b');
-$package->workBook->workSheets->add('c');
+// $package->workBook->workSheets->add('a');
+// $package->workBook->workSheets->add('b');
+// $package->workBook->workSheets->add('c');
 
-var_dump(count($package->workBook->workSheets));
-foreach ($package->workBook->workSheets as $name => $worksheet) {
-    var_dump($name, $worksheet);
-}
+// var_dump(count($package->workBook->workSheets));
+// foreach ($package->workBook->workSheets as $name => $worksheet) {
+//     var_dump($name, $worksheet);
+// }
 
-exit;
+// exit;
 
 
 // worksheet
@@ -151,6 +151,10 @@ $datas = [
 foreach ($datas as $data) {
     $worksheet->addRow($data);
 }
+
+// insert
+$worksheet->insertRow(3, [6,6,6,6,6,6]);
+$worksheet->insertColumn(5, [9,9,9,9,9,9]);
 
 // add column
 // $datas = [

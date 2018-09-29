@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Pchp.Core;
 using Pchp.Library;
 using OfficeOpenXml;
@@ -77,6 +78,10 @@ namespace nulastudio.Document.EPPlus4PHP
                 cells[string.Format("{0}{1}",columnName,rowIndex)].value = item;
             }
         }
+        public void addRow(Context ctx, params PhpValue[] datas)
+        {
+            addRow(ctx, PhpArray.New(datas));
+        }
         public void addColumn(Context ctx, PhpArray column)
         {
             int columnIndex = (hasData ? datas.toColumn : 0) + 1;
@@ -86,6 +91,52 @@ namespace nulastudio.Document.EPPlus4PHP
             {
                 cells[string.Format("{0}{1}", columnName, startRow++)].value = item;
             }
+        }
+        public void addColumn(Context ctx, params PhpValue[] datas)
+        {
+            addColumn(ctx, PhpArray.New(datas));
+        }
+        public void insertRow(Context ctx, int row, PhpArray data)
+        {
+            _workSheet.InsertRow(row, 1);
+            int startColumn = 1;
+            foreach (PhpValue item in data.Values)
+            {
+                cells[string.Format("{0}{1}", ExcelConvert.toName(startColumn++), row)].value = item;
+            }
+        }
+        public void insertRow(Context ctx, string row, PhpArray data)
+        {
+            insertRow(ctx, int.Parse(row), data);
+        }
+        public void insertRow(Context ctx, int row, params PhpValue[] datas)
+        {
+            insertRow(ctx, row, PhpArray.New(datas));
+        }
+        public void insertRow(Context ctx, string row, params PhpValue[] datas)
+        {
+            insertRow(ctx, row, PhpArray.New(datas));
+        }
+        public void insertColumn(Context ctx, string column, PhpArray data)
+        {
+            _workSheet.InsertColumn(ExcelConvert.toIndex(column), 1);
+            int startRow = 1;
+            foreach (PhpValue item in data.Values)
+            {
+                cells[string.Format("{0}{1}", column, startRow++)].value = item;
+            }
+        }
+        public void insertColumn(Context ctx, int column, PhpArray data)
+        {
+            insertColumn(ctx, ExcelConvert.toName(column), data);
+        }
+        public void insertColumn(Context ctx, int column, params PhpValue[] datas)
+        {
+            insertColumn(ctx, column, PhpArray.New(datas));
+        }
+        public void insertColumn(Context ctx, string column, params PhpValue[] datas)
+        {
+            insertColumn(ctx, column, PhpArray.New(datas));
         }
         #endregion
     }
