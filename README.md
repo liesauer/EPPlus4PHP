@@ -6,6 +6,7 @@
   <a href="https://www.nuget.org/packages/nulastudio.Document.EPPlus4PHP"><img src="https://img.shields.io/nuget/v/nulastudio.Document.EPPlus4PHP.svg"></a>
   <a href="http://docs.epplus4php.nulastudio.org/"><img src="https://img.shields.io/badge/docs-docs.epplus4php.nulastudio.org-green.svg"></a>
   <a href="https://gitter.im/nulastudio/EPPlus4PHP"><img src="https://badges.gitter.im/nulastudio/EPPlus4PHP.svg"></a>
+  <a href="https://jq.qq.com/?_wv=1027&k=5De1ptl"><img src="https://img.shields.io/badge/QQ%20Group-839158365-blue.svg"></a>
 </p>
 
 
