@@ -5,6 +5,7 @@ using Pchp.Core;
 using Pchp.Library;
 using OfficeOpenXml;
 using System.Text.RegularExpressions;
+using nulastudio.KVO;
 
 namespace nulastudio.Document.EPPlus4PHP
 {
@@ -19,6 +20,7 @@ namespace nulastudio.Document.EPPlus4PHP
         public const string REGEX_MULTI_CELLS = "^[A-Z]+[1-9][0-9]*:[A-Z]+[1-9][0-9]*$";
 
         private ExcelRange _range;
+        private Comment _comment;
         private Style.Style _style;
         private bool _is1Base;
         public Range(ExcelRange range, bool is1Base)
@@ -26,6 +28,12 @@ namespace nulastudio.Document.EPPlus4PHP
             _range = range;
             _is1Base = is1Base;
             _style = new Style.Style(range.Style);
+            ExcelComment _ecomment = _range.Worksheet.Cells[_range.Address].Comment;
+            if (_ecomment != null)
+            {
+                _comment = new Comment(_ecomment.Text, _ecomment.Author);
+                _comment.OnValueChanged += CommentChanged;
+            }
         }
 
         public bool is1Base { get => _is1Base; }
@@ -127,6 +135,54 @@ namespace nulastudio.Document.EPPlus4PHP
                     _range.Merge = value;
                 }
                 catch {}
+            }
+        }
+        public Comment comment
+        {
+            get => _comment;
+            set
+            {
+                _comment = value;
+                ExcelComment _ecomment = _range.Worksheet.Cells[address].Comment;
+                if (_comment == null)
+                {
+                    if (_ecomment != null)
+                    {
+                        _range.Worksheet.Comments.Remove(_ecomment);
+                    }
+                }
+                else
+                {
+                    _comment.OnValueChanged += CommentChanged;
+                    if (_ecomment == null)
+                    {
+                        _range.Worksheet.Cells[address].AddComment(_comment.text, _comment.author);
+                    }
+                    else
+                    {
+                        _ecomment.Text = _comment.text;
+                        _ecomment.Author = _comment.author;
+                    }
+                }
+            }
+        }
+        internal void CommentChanged(object sender, ValueChangedEventArgs e)
+        {
+            ExcelComment _ecomment = _range.Worksheet.Cells[address].Comment;
+            if (_ecomment == null)
+            {
+                return;
+            }
+            switch (e.PropertyName)
+            {
+                case "text":
+                    _ecomment.Text = e.NewValue as string;
+                    break;
+                case "author":
+                    _ecomment.Author = e.NewValue as string;
+                    break;
+                default:
+                    break;
             }
         }
 

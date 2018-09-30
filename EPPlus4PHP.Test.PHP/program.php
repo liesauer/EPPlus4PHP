@@ -142,19 +142,19 @@ $singleCell = $worksheet->cells['A1'];
 
 
 // add row
-$datas = [
-    [1,2,3,4,5,6,7],
-    [8,8,8,8,8,8,8,8],
-    [2,2,2,2,2,2,2,2],
-    ['1','','qq','wa','asd','ppp'],
-];
-foreach ($datas as $data) {
-    $worksheet->addRow($data);
-}
+// $datas = [
+//     [1,2,3,4,5,6,7],
+//     [8,8,8,8,8,8,8,8],
+//     [2,2,2,2,2,2,2,2],
+//     ['1','','qq','wa','asd','ppp'],
+// ];
+// foreach ($datas as $data) {
+//     $worksheet->addRow($data);
+// }
 
 // insert
-$worksheet->insertRow(3, [6,6,6,6,6,6]);
-$worksheet->insertColumn(5, [9,9,9,9,9,9]);
+// $worksheet->insertRow(3, [6,6,6,6,6,6]);
+// $worksheet->insertColumn(5, [9,9,9,9,9,9]);
 
 // add column
 // $datas = [
@@ -168,6 +168,14 @@ $worksheet->insertColumn(5, [9,9,9,9,9,9]);
 // }
 
 // var_dump($package);
+
+// comment
+// $singleCell->comment = "你好";
+// $singleCell->comment->text = null;
+// $singleCell->comment->author = "LiesAuer";
+// $singleCell->comment = null;
+// $singleCell->comment = null;
+// $singleCell->comment = 0;
 
 // ArrayAccess
 // var_dump($package->workBook->workSheets[1]);
