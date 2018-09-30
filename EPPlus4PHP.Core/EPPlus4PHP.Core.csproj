@@ -6,7 +6,7 @@
     <Authors>LiesAuer</Authors>
     <Company>nulastudio</Company>
     <Description>EPPlus4PHP, written with peachpie.</Description>
-    <Version>0.1.6-CI01154</Version>
+    <Version>0.1.7-CI01154</Version>
     <Product>nulastudio.Document.EPPlus4PHP</Product>
     <PackageProjectUrl>https://github.com/liesauer/EPPlus4PHP</PackageProjectUrl>
   </PropertyGroup>
