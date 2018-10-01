@@ -48,8 +48,9 @@
 - [x] 备注
   - [ ] 富文本
 - [ ] 公式
-  - [ ] [内置公式](supported-builtin-functions.md)
+  - [x] [内置公式](supported-builtin-functions.md)
   - [ ] 自定义公式
+  - [x] R1C1
 - [ ] 图表
 - [ ] 加密保护
   - [x] 加密

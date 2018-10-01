@@ -19,6 +19,10 @@ $singleCell = $worksheet->cells['A1'];
 // var_dump($worksheet->fullAddress);
 // var_dump($worksheet->fullAddressAbsolute);
 
+// $singleCell->formula = function() {
+//     return microtime(true);
+// };
+
 // $package->workBook->workSheets->add('a');
 // $package->workBook->workSheets->add('b');
 // $package->workBook->workSheets->add('c');

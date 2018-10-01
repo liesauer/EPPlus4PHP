@@ -185,6 +185,24 @@ namespace nulastudio.Document.EPPlus4PHP
                     break;
             }
         }
+        private string _formula;
+        public string formula
+        {
+            get => _range.Formula;
+            set
+            {
+                _range.Formula = value;
+            }
+        }
+        private string _formulaR1C1;
+        public string formulaR1C1
+        {
+            get => _range.FormulaR1C1;
+            set
+            {
+                _range.FormulaR1C1 = value;
+            }
+        }
 
         #region Indexer
         public Range this[string address]
