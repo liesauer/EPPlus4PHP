@@ -7,6 +7,7 @@ using OfficeOpenXml.FormulaParsing;
 using OfficeOpenXml.FormulaParsing.Excel.Functions;
 using OfficeOpenXml.FormulaParsing.ExpressionGraph;
 using ExcelDataType = OfficeOpenXml.FormulaParsing.ExpressionGraph.DataType;
+using OfficeOpenXml.FormulaParsing.Exceptions;
 
 namespace nulastudio.Document.EPPlus4PHP
 {
@@ -33,7 +34,12 @@ namespace nulastudio.Document.EPPlus4PHP
             try
             {
                 ret = _callback.__invoke(PhpValue.Create(args), PhpValue.Create(contextArr));
-                if (ret.IsInteger())
+                if (ret.IsNull)
+                {
+                    val = null;
+                    dt = ExcelDataType.Empty;
+                }
+                else if (ret.IsInteger())
                 {
                     val = ret.ToLong();
                     dt = ExcelDataType.Integer;
@@ -53,12 +59,25 @@ namespace nulastudio.Document.EPPlus4PHP
                     val = ret.ToBoolean();
                     dt = ExcelDataType.Boolean;
                 }
-                # warning TODO
-                // else if (ret.IsObject && ret.Object is Range)
-                // {
-                // }
-            } catch {
-                val = null;
+#warning TODO
+// Date, Time, Enumerable, LookupArray
+                else if (ret.IsObject && ret.Object is Range)
+                {
+                    val = (ret.Object as Range).address;
+                    dt = ExcelDataType.ExcelAddress;
+                }
+                else if (ret.IsObject && ret.Object is ExcelErrorValue)
+                {
+                    val = new ErrorValue((ErrorValueType)(int)((ret.Object as ExcelErrorValue).Type));
+                    dt = ExcelDataType.ExcelError;
+                }
+                else
+                {
+                    val = ret.Object;
+                    dt = ExcelDataType.Unknown;
+                }
+            } catch(ExcelErrorValueException e) {
+                val = new ErrorValue((ErrorValueType)(int)e.ErrorValue.Type);
                 dt = ExcelDataType.ExcelError;
             }
             return CreateResult(val, dt);
