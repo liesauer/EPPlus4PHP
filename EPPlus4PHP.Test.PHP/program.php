@@ -23,6 +23,20 @@ $singleCell = $worksheet->cells['A1'];
 //     return microtime(true);
 // };
 
+// functions
+
+$package->addOrReplaceFunction('microtime', function(array $args, array $context) {
+    return microtime(true);
+});
+
+$worksheet->cells['A1']->formula = 'microtime()';
+
+var_dump($worksheet->cells['A1']->value);
+
+$worksheet->cells['A1']->formula = '';
+
+var_dump($worksheet->cells['A1']->value);
+
 // $package->workBook->workSheets->add('a');
 // $package->workBook->workSheets->add('b');
 // $package->workBook->workSheets->add('c');

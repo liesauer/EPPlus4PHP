@@ -93,5 +93,13 @@ namespace nulastudio.Document.EPPlus4PHP
         }
 
         public WorkBook workBook { get => _workBook; }
+
+        #region 自定义公式
+        public void addOrReplaceFunction(Context ctx, string funcName, Closure func)
+        {
+            // _excelPackage.Workbook.FormulaParserManager.AddOrReplaceFunction(funcName, new Function());
+            _excelPackage.Workbook.FormulaParserManager.AddOrReplaceFunction(funcName, new Function(ctx, this, func));
+        }
+        #endregion
     }
 }

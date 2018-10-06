@@ -3,6 +3,7 @@ using System.Collections;
 using Pchp.Core;
 using Pchp.Library;
 using OfficeOpenXml;
+using OfficeOpenXml.FormulaParsing.Exceptions;
 
 namespace nulastudio.Document.EPPlus4PHP
 {
@@ -137,6 +138,22 @@ namespace nulastudio.Document.EPPlus4PHP
         public void insertColumn(Context ctx, string column, params PhpValue[] datas)
         {
             insertColumn(ctx, column, PhpArray.New(datas));
+        }
+        #endregion
+
+        #region calculate
+        public PhpValue calculate(string formula)
+        {
+            object val = _workSheet.Calculate(formula);
+            if (val is ExcelErrorValueException)
+            {
+                val = (val as ExcelErrorValueException).ErrorValue;
+            }
+            if (val is ExcelErrorValue)
+            {
+                val = new ErrorValue((ErrorValueType)(int)((val as ExcelErrorValue).Type));
+            }
+            return PhpValue.FromClr(val);
         }
         #endregion
     }

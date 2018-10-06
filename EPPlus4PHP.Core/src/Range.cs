@@ -6,6 +6,7 @@ using Pchp.Library;
 using OfficeOpenXml;
 using System.Text.RegularExpressions;
 using nulastudio.KVO;
+using OfficeOpenXml.FormulaParsing.Exceptions;
 
 namespace nulastudio.Document.EPPlus4PHP
 {
@@ -64,7 +65,17 @@ namespace nulastudio.Document.EPPlus4PHP
                         int columns = data.GetLength(1);
                         for (int j = 0; j < columns; j++)
                         {
-                            rowData.AddValue(PhpValue.FromClr(data.GetValue(i,j)));
+                            object val = data.GetValue(i, j);
+                            if (val is ExcelErrorValueException)
+                            {
+                                val = (val as ExcelErrorValueException).ErrorValue;
+                            }
+                            if (val is ExcelErrorValue)
+                            {
+                                eErrorType errorType = (val as ExcelErrorValue).Type;
+                                val = new ErrorValue((ErrorValueType)(int)errorType);
+                            }
+                            rowData.AddValue(PhpValue.FromClr(val));
                         }
                         arr.AddValue(PhpValue.Create(rowData));
                     }
@@ -72,7 +83,17 @@ namespace nulastudio.Document.EPPlus4PHP
                 }
                 else
                 {
-                    return PhpValue.FromClr(_range.Value);
+                    object val = _range.Value;
+                    if (val is ExcelErrorValueException)
+                    {
+                        val = (val as ExcelErrorValueException).ErrorValue;
+                    }
+                    if (val is ExcelErrorValue)
+                    {
+                        eErrorType errorType = (val as ExcelErrorValue).Type;
+                        return PhpValue.FromClr(new ErrorValue((ErrorValueType)(int)errorType));
+                    }
+                    return PhpValue.FromClr(val);
                 }
             }
             set
@@ -192,6 +213,7 @@ namespace nulastudio.Document.EPPlus4PHP
             set
             {
                 _range.Formula = value;
+                _range.Worksheet.Calculate();
             }
         }
         private string _formulaR1C1;
@@ -201,6 +223,7 @@ namespace nulastudio.Document.EPPlus4PHP
             set
             {
                 _range.FormulaR1C1 = value;
+                _range.Worksheet.Calculate();
             }
         }
 
