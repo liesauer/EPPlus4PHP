@@ -25,17 +25,17 @@ $singleCell = $worksheet->cells['A1'];
 
 // functions
 
-$package->addOrReplaceFunction('microtime', function(array $args, array $context) {
-    return microtime(true);
-});
+// $package->addOrReplaceFunction('microtime', function(array $args, array $context) {
+//     return microtime(true);
+// });
 
-$worksheet->cells['A1']->formula = 'microtime()';
+// $worksheet->cells['A1']->formula = 'microtime()';
 
-var_dump($worksheet->cells['A1']->value);
+// var_dump($worksheet->cells['A1']->value);
 
-$worksheet->cells['A1']->formula = '';
+// $worksheet->cells['A1']->formula = '';
 
-var_dump($worksheet->cells['A1']->value);
+// var_dump($worksheet->cells['A1']->value);
 
 // $package->workBook->workSheets->add('a');
 // $package->workBook->workSheets->add('b');
@@ -170,6 +170,7 @@ var_dump($worksheet->cells['A1']->value);
 //     $worksheet->addRow($data);
 // }
 
+ExcelPackage::foo(new DateTime());
 // insert
 // $worksheet->insertRow(3, [6,6,6,6,6,6]);
 // $worksheet->insertColumn(5, [9,9,9,9,9,9]);

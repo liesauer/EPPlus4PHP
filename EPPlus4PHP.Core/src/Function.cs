@@ -63,7 +63,7 @@ namespace nulastudio.Document.EPPlus4PHP
 // Date, Time, Enumerable, LookupArray
                 else if (ret.IsObject && ret.Object is Range)
                 {
-                    val = (ret.Object as Range).address;
+                    val = (ret.Object as Range).fullAddress;
                     dt = ExcelDataType.ExcelAddress;
                 }
                 else if (ret.IsObject && ret.Object is ExcelErrorValue)
