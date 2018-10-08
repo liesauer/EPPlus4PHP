@@ -15,6 +15,11 @@ $singleCell = $worksheet->cells['A1'];
 // $package->save();
 // die;
 
+
+// $singleCell->value = new stdClass();
+
+// var_dump($singleCell->value);
+
 // var_dump($worksheet->address);
 // var_dump($worksheet->fullAddress);
 // var_dump($worksheet->fullAddressAbsolute);
@@ -170,7 +175,7 @@ $singleCell = $worksheet->cells['A1'];
 //     $worksheet->addRow($data);
 // }
 
-ExcelPackage::foo(new DateTime());
+// ExcelPackage::foo(new DateTime());
 // insert
 // $worksheet->insertRow(3, [6,6,6,6,6,6]);
 // $worksheet->insertColumn(5, [9,9,9,9,9,9]);

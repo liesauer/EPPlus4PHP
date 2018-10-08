@@ -80,6 +80,11 @@ namespace nulastudio.Document.EPPlus4PHP
                 val = new ErrorValue((ErrorValueType)(int)e.ErrorValue.Type);
                 dt = ExcelDataType.ExcelError;
             }
+            catch (Exception)
+            {
+                val = new ErrorValue(ErrorValueType.Value);
+                dt = ExcelDataType.ExcelError;
+            }
             return CreateResult(val, dt);
         }
     }
