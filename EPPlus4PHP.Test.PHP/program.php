@@ -30,11 +30,11 @@ $singleCell = $worksheet->cells['A1'];
 
 // functions
 
-// $package->addOrReplaceFunction('microtime', function(array $args, array $context) {
-//     return microtime(true);
-// });
+$package->addOrReplaceFunction('test', function(array $args, array $context) {
+    return "\xf\xe\xf\xe";
+});
 
-// $worksheet->cells['A1']->formula = 'microtime()';
+$worksheet->cells['A1']->formula = 'test()';
 
 // var_dump($worksheet->cells['A1']->value);
 

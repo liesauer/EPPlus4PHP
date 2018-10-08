@@ -32,17 +32,16 @@ namespace nulastudio.Document.EPPlus4PHP
             try
             {
                 dt = (DataType)dataType;
-                switch ((DataType)dataType)
+                switch (dt)
                 {
                     case DataType.Integer:
-                        dt = ExcelDataType.Integer;
                         if (value is int || value is long)
                         {
                             val = value;
                         }
                         else if (value is float || value is double)
                         {
-                            val = (int)(double)value;
+                            val = (long)(double)value;
                         }
                         else if (value is string)
                         {
@@ -53,6 +52,10 @@ namespace nulastudio.Document.EPPlus4PHP
                             else if (int.TryParse(value as string, out var inum))
                             {
                                 val = inum;
+                            }
+                            else
+                            {
+                                val = 0;
                             }
                         }
                         else if (value is PhpString)
@@ -66,13 +69,65 @@ namespace nulastudio.Document.EPPlus4PHP
                             {
                                 val = inum;
                             }
+                            else
+                            {
+                                val = 0;
+                            }
                         }
                         break;
                     case DataType.Decimal:
+                        if (value is int || value is long)
+                        {
+                            val = (double)value;
+                        }
+                        else if (value is float || value is double)
+                        {
+                            val = (double)value;
+                        }
+                        else if (value is PhpValue)
+                        {
+                            PhpValue phpValue = (PhpValue)value;
+                            if (phpValue.IsInteger())
+                            {
+                                val = (double)phpValue;
+                            }
+                            else if (phpValue.IsLong(out var l))
+                            {
+                                val = (double)l;
+                            }
+                        }
+                        else if (value is PhpString && double.TryParse(((PhpString)value).ToString(ctx), out var f))
+                        {
+                            val = f;
+                        }
                         break;
                     case DataType.String:
+                        if (value is PhpValue)
+                        {
+                            val = ((PhpValue)value).ToString(ctx);
+                        }
+                        else if (value is PhpString)
+                        {
+                            val = ((PhpString)value).ToString(ctx);
+                        }
+                        else
+                        {
+                            val = value.ToString();
+                        }
                         break;
                     case DataType.Boolean:
+                        if (value is PhpString)
+                        {
+                            val = !((PhpString)value).IsEmpty;
+                        }
+                        else if (value is PhpValue)
+                        {
+                            val = !((PhpValue)value).IsEmpty;
+                        }
+                        else
+                        {
+                            val = !PhpValue.FromClr(value).IsEmpty;
+                        }
                         break;
                     case DataType.Date:
                         break;
@@ -83,8 +138,25 @@ namespace nulastudio.Document.EPPlus4PHP
                     case DataType.LookupArray:
                         break;
                     case DataType.ExcelAddress:
+                        val = null;
+                        if (val is PhpValue)
+                        {
+                            object obj = ((PhpValue)val).Object;
+                            if (obj is Range)
+                            {
+                                val = ((Range)obj).fullAddress;
+                            }
+                        }
                         break;
                     case DataType.ExcelError:
+                        if (value is int || value is long)
+                        {
+                            val = new ErrorValue((ErrorValueType)(int)value);
+                        }
+                        else
+                        {
+                            val = new ErrorValue(ErrorValueType.Value);
+                        }
                         break;
                     case DataType.Empty:
                         val = null;
