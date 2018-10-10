@@ -47,7 +47,7 @@
 - [ ] 数据验证
 - [x] 备注
   - [ ] 富文本
-- [ ] 公式
+- [x] 公式
   - [x] [内置公式](supported-builtin-functions.md)
   - [x] 自定义公式
   - [x] R1C1
