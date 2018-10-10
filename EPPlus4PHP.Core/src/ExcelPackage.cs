@@ -93,6 +93,7 @@ namespace nulastudio.Document.EPPlus4PHP
         }
 
         public WorkBook workBook { get => _workBook; }
+        public bool is1base { get => _excelPackage.Compatibility.IsWorksheets1Based; }
 
         #region 自定义公式
         public void addOrReplaceFunction(Context ctx, string funcName, Closure func)
