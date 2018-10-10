@@ -30,11 +30,57 @@ $singleCell = $worksheet->cells['A1'];
 
 // functions
 
+// enumerable
+// class Enumerable/*  implements \Iterator */
+// {
+//     private $position = 0;
+//     private $array = array(
+//         "firstelement",
+//         "secondelement",
+//         "lastelement",
+//     );  
+
+//     public function __construct() {
+//         $this->position = 0;
+//     }
+
+//     public function rewind() {
+//         $this->position = 0;
+//     }
+
+//     public function current() {
+//         return $this->array[$this->position];
+//     }
+
+//     public function key() {
+//         return $this->position;
+//     }
+
+//     public function next() {
+//         ++$this->position;
+//     }
+
+//     public function valid() {
+//         return isset($this->array[$this->position]);
+//     }
+// }
+
 $package->addOrReplaceFunction('test', function(array $args, array $context) {
-    return "\xf\xe\xf\xe";
+    // var_dump($args, $context);
+    return $args;
+});
+$package->addOrReplaceFunction('test2', function(array $args, array $context) {
+    // var_dump($args, $context);
+    return 'Y';
 });
 
-$worksheet->cells['A1']->formula = 'test()';
+$worksheet->cells['F7:F9']->formula = 'test2(test(1,1.1,"1",false,,A1:A1,A2:A3))';
+
+// var_dump($worksheet->cells['F4']->value);
+
+// $worksheet->cells['F4']->formula = '';
+
+// $worksheet->cells['F4']->value = new \Enumerable();
 
 // var_dump($worksheet->cells['A1']->value);
 

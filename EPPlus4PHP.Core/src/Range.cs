@@ -213,7 +213,7 @@ namespace nulastudio.Document.EPPlus4PHP
             set
             {
                 _range.Formula = value;
-                _range.Worksheet.Calculate();
+                _range.Calculate();
             }
         }
         private string _formulaR1C1;
@@ -223,7 +223,7 @@ namespace nulastudio.Document.EPPlus4PHP
             set
             {
                 _range.FormulaR1C1 = value;
-                _range.Worksheet.Calculate();
+                _range.Calculate();
             }
         }
 
