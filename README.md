@@ -65,7 +65,7 @@ EPPlus4PHP内部封装使用了EPPlus，仅此而已。
 - [ ] 数据验证
 - [x] 备注
   - [ ] 富文本
-- [ ] 公式
+- [x] 公式
   - [x] [内置公式](EPPlus4PHP.Core/supported-builtin-functions.md)
   - [x] 自定义公式
   - [x] R1C1
