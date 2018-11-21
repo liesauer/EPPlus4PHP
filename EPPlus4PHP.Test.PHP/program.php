@@ -1,7 +1,7 @@
 <?php
 
-use nulastudio\Document\EPPlus4PHP\ExcelPackage;
 use nulastudio\Document\EPPlus4PHP\ExcelConvert;
+use nulastudio\Document\EPPlus4PHP\ExcelPackage;
 use nulastudio\Document\EPPlus4PHP\Range;
 use nulastudio\Document\EPPlus4PHP\Style\Color;
 use nulastudio\Document\EPPlus4PHP\Style\UnderLineType;
@@ -9,12 +9,11 @@ use nulastudio\Document\EPPlus4PHP\Style\VerticalAlignmentFont;
 
 $package = new ExcelPackage(__DIR__ . '/test.xlsx');
 
-$worksheet = $package->workBook->workSheets['sheet2'];
+$worksheet  = $package->workBook->workSheets['sheet2'];
 $singleCell = $worksheet->cells['A1'];
 // $worksheet->addRow([1,2,3,4,5]);
 // $package->save();
 // die;
-
 
 // $singleCell->value = new stdClass();
 
@@ -38,7 +37,7 @@ $singleCell = $worksheet->cells['A1'];
 //         "firstelement",
 //         "secondelement",
 //         "lastelement",
-//     );  
+//     );
 
 //     public function __construct() {
 //         $this->position = 0;
@@ -98,7 +97,6 @@ $singleCell = $worksheet->cells['A1'];
 // }
 
 // exit;
-
 
 // worksheet
 // var_dump(isset($package->workBook->workSheets[1]));
@@ -202,13 +200,11 @@ $singleCell = $worksheet->cells['A1'];
 // $worksheet->cells['A1:C2']->style->horizontalAlignment = HorizontalAlignment::Right;
 // $worksheet->cells['A1:C2']->style->verticalAlignment = VerticalAlignment::Top;
 
-
 // $package->save("test2");
 
 // save/saveAs
 // $package->saveAs(__DIR__ . '/test2.xlsx');
 // $package->saveAs(__DIR__ . '/test2_pwd.xlsx', 'test');
-
 
 // add row
 // $datas = [
@@ -240,7 +236,7 @@ $singleCell = $worksheet->cells['A1'];
 // var_dump($package);
 
 // comment
-// $singleCell->comment = "你好";
+// $singleCell->comment = "浣犲ソ";
 // $singleCell->comment->text = null;
 // $singleCell->comment->author = "LiesAuer";
 // $singleCell->comment = null;
@@ -272,21 +268,21 @@ $singleCell = $worksheet->cells['A1'];
 
 // $package->workBook->workSheets['test sheet']->cells['A1']->font->size = 50;
 
-// ??????
+// 类型写入测试
+
+// 第一个参数不能为布尔型
 
 $worksheet->addRow(
+    666,
     false,
-    666
-    // true,
-    // 666.0,
-    // 'haha',
-    // ['a','b','c'],
-    // new stdClass,
-    // null,
-    // function(){},
-    // curl_init()
+    true,
+    666.0,
+    'haha',
+    ['a', 'b', 'c'],
+    new stdClass,
+    null,
+    function () {},
+    curl_init()
 );
-
-echo '';
 
 $package->save();
