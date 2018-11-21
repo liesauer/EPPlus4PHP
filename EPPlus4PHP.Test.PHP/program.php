@@ -65,16 +65,16 @@ $singleCell = $worksheet->cells['A1'];
 //     }
 // }
 
-$package->addOrReplaceFunction('test', function(array $args, array $context) {
-    // var_dump($args, $context);
-    return $args;
-});
-$package->addOrReplaceFunction('test2', function(array $args, array $context) {
-    // var_dump($args, $context);
-    return 'Y';
-});
+// $package->addOrReplaceFunction('test', function(array $args, array $context) {
+//     // var_dump($args, $context);
+//     return $args;
+// });
+// $package->addOrReplaceFunction('test2', function(array $args, array $context) {
+//     // var_dump($args, $context);
+//     return 'Y';
+// });
 
-$worksheet->cells['F7:F9']->formula = 'test2(test(1,1.1,"1",false,,A1:A1,A2:A3))';
+// $worksheet->cells['F7:F9']->formula = 'test2(test(1,1.1,"1",false,,A1:A1,A2:A3))';
 
 // var_dump($worksheet->cells['F4']->value);
 
@@ -272,5 +272,21 @@ $worksheet->cells['F7:F9']->formula = 'test2(test(1,1.1,"1",false,,A1:A1,A2:A3))
 
 // $package->workBook->workSheets['test sheet']->cells['A1']->font->size = 50;
 
+// ??????
+
+$worksheet->addRow(
+    false,
+    666
+    // true,
+    // 666.0,
+    // 'haha',
+    // ['a','b','c'],
+    // new stdClass,
+    // null,
+    // function(){},
+    // curl_init()
+);
+
+echo '';
 
 $package->save();
